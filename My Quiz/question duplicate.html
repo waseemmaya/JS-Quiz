@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Angular</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <!-- <ol id="quiz"></ol> -->
+        <form id="quiz"></form>
+        <button id="submit" onclick="return myFunc()">Submit Quiz</button>
+        <div id="results"></div>
+    </div>
+</body>
+<script>
+
+    var quizQuestions = [
+        {
+            type: "text",
+            text: "How much can a loggerhead weigh?",
+            answers: [
+                {
+                    answer: "Up to 20kg"
+                },
+                {
+                    answer: "Up to 115kg"
+                },
+                {
+                    answer: "Waseem"
+                },
+                {
+                    answer: "Up to 500kg"
+                }
+            ],
+            selected: null,
+            correctAnswers: "Waseem"
+        },
+        {
+            type: "text",
+            text: "Where does the Kemp's Ridley Sea Turtle live?'",
+            answers: [
+                {
+                    answer: "Tropical waters all around the world"
+                },
+                {
+                    answer: "Pakistan"
+                },
+                {
+                    answer: "Coastal North Atlantic"
+                },
+                {
+                    answer: "South pacific islands"
+                }
+            ],
+            selected: null,
+            correctAnswers: "Pakistan"
+        },
+        {
+            type: "text",
+            text: "What is the typical lifespan of a Green Sea Turtle?",
+            answers: [
+                {
+                    answer: "150 years"
+                },
+                {
+                    answer: "10 years"
+                },
+                {
+                    answer: "80 years"
+                },
+                {
+                    answer: "True"
+                }
+            ],
+            selected: null,
+            correctAnswers: "True"
+        }
+    ];
+
+
+    // var correctAns = ['Android', 'Saylani'];
+    var score = 0;
+
+    function myFunc() {
+        for (let j = 0; j < obj.results.length; j++) {  //loop for all input labels
+            var allRadios = document.getElementsByName('q' + j);
+            for (let i = 0; i < 3; i++) {  //loop for all available answers
+                if (allRadios[i].checked) {
+                    // console.log('ch2');
+                    if (allRadios[i].value == obj.results[j].correct_answer) {
+                        console.log('True');
+                        score++;
+                        break;
+                    } else {
+                        // console.log('wrong');
+                    }
+                } else {
+                    // console.log('check an item plz');
+                }
+            }
+        }
+        console.log(score);
+        document.getElementById('results').innerHTML = `<h2>${score} out of ${obj.results.length}</h2>`;
+        score = 0;
+        return false;
+    }
+
+    const quizForm = document.getElementById('quiz');
+    const resultsContainer = document.getElementById('results');
+    const submitButton = document.getElementById('submit');
+
+    var obj;
+
+    // fetch('https://jsonplaceholder.typicode.com/posts/1')
+    //     .then(res => res.json())
+    //     .then(data => obj = data)
+    //     .then(() => console.log(obj))
+
+
+    function buildQuiz() {
+
+        var url = 'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple';
+        fetch(url)
+            .then((res) => res.json())
+            .then(saveObj => obj = saveObj)
+            .then((data) => {
+                console.log('obj***', obj.results);
+
+                data.results.map((val, i) => {
+                    let question = `<h6>${val.question}</h6>
+                    <input type="radio" name="${"q" + i}" value="${val.correct_answer}"/> ${val.correct_answer}
+                    `;
+                    quizForm.innerHTML += question;
+                    console.log(val);
+
+                    for (const ans in val.incorrect_answers) {
+                        let a = `<input type="radio" name="${"q" + i}" value="${val.incorrect_answers[ans]}"/> ${val.incorrect_answers[ans]}`;
+                        quizForm.innerHTML += a;
+                    }
+                })
+            })
+
+
+
+
+
+    }
+
+    buildQuiz();
+    var numCorrect = 0;
+
+    function getData() {
+
+
+        quizQuestions.forEach((currentQuestion, i) => {
+            var radios = document.getElementsByName('q' + i);
+            // find selected answer
+
+
+
+            // if answer is correct
+            if (radios[i].checked) {
+                // add to the number of correct answers
+                numCorrect++;
+
+                // color the answers green
+                // console.log('sahi');
+
+            }
+            // if answer is wrong or blank
+            else {
+                // color the answers red
+                // console.log('glt');
+            }
+        });
+
+
+    }
+
+
+
+
+
+    // function markQuiz() {
+    //     var newArr = [];
+    //     for (var i = 0; i < quizQuestions.length; i++) {
+    //         const selector = "q" + i;
+
+    //         const userAnswer = document.getElementsByName(selector);
+
+    //         let a = document.getElementsByName(selector)[i];
+    //         console.log(a.value);
+
+    //     }
+    //     // console.log(newArr);
+    // }
+</script>
+
+</html>
