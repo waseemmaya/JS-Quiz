@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quiz PDF Tutorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <h3>Best Mobile OS</h3>
+            <input type="radio" name='q0' value="Windows">Windows
+            <input type="radio" name='q0' value="Android">Android
+            <input type="radio" name='q0' value="IOS">IOS
+            <h3>Best Institue</h3>
+            <input type="radio" name='q1' value="NED University">NED University
+            <input type="radio" name='q1' value="Karachi University">Karachi University
+            <input type="radio" name='q1' value="Saylani">Saylani
+            <!-- submit button -->
+            <br>
+            <br>
+            <input type="submit" onclick="return myFunc()">
+        </form>
+        <h3 id="result"></h3>
+    </div>
+</body>
+
+<script>
+
+    var correctAns = ['Android', 'Saylani'];
+    var score = 0;
+    function myFunc() {
+        for (let j = 0; j < 2; j++) {
+            var allRadios = document.getElementsByName('q' + j);
+            for (let i = 0; i < 3; i++) {
+                if (allRadios[i].checked) {
+                    // console.log('ch2');
+                    if (allRadios[i].value == correctAns[j]) {
+                        console.log('True');
+                        score++;
+                        break;
+                    } else {
+                        console.log('wrong');
+
+                    }
+                } else {
+                    console.log('check an item plz');
+
+                }
+            }
+
+
+
+        }
+        console.log(score);
+        document.getElementById('result').innerHTML = score;
+        score = 0;
+        return false;
+    }
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quiz PDF Tutorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <h3>Best OS</h3>
+            <input type="radio" name='bestOS' value="Windows">Windows
+            <input type="radio" name='bestOS' value="Android">Android
+            <input type="radio" name='bestOS' value="IOS">IOS
+            submit button
+<input type="submit" onclick="return myFunc()">
+</form>
+</div>
+</body> -->
+
+<!-- <script>
+
+
+    var Q1CorrectAns = 'Android';
+    var Q1 = document.getElementsByName('bestOS');
+    function myFunc() {
+
+        for (let i = 0; i < 3; i++) {
+            if (Q1[i].checked) {
+                // console.log(Q1[i].value);
+                if (Q1[i].value == Q1CorrectAns) {
+                    alert("Correct Ans");
+                } else {
+                    alert('Wrong Ans and correct ans is ' + Q1CorrectAns);
+
+                }
+            } else {
+                console.log('Select an Option');
+            }
+        }
+        return false;
+    }
+
+
+
+</script> -->
+
+<!-- </html> -->
