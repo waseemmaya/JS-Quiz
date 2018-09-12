@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Practice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form onsubmit="return getRadioData()">
+            <p>
+                Best OS?
+                <br />
+                <input type="radio" name="Q1Ans" value="Windows" />
+                Windows
+                <input type="radio" name="Q1Ans" value="Android" />
+                Android
+                <input type="radio" name="Q1Ans" value="IOS" />
+                IOS
+            </p>
+            <p>
+                Best Mobile?
+                <br />
+                <input type="radio" name="Q2Ans" value="LG G4" />
+                LG G4
+                <input type="radio" name="Q2Ans" value="Iphone X" />
+                Iphone X
+                <input type="radio" name="Q2Ans" value="Samsung Galaxy S8 Plus" />
+                Samsung Galaxy S8 Plus
+            </p>
+            <input type="submit" value="submit">
+        </form>
+        <h1 id="score"></h1>
+    </div>
+</body>
+
+<script>
+
+    var score = 0;
+
+    function getRadioData() {
+        Q1();
+        Q2();
+        return false
+    }
+
+    function Q1() {
+        let checkedVal;
+        let radioName = document.getElementsByName('Q1Ans');
+        for (let i = 0; i < radioName.length; i++) {
+            if (radioName[i].checked) {
+                checkedVal = radioName[i].value;
+                console.log("Checked Value", checkedVal)
+            } else {
+                console.log('didnt checked');
+
+            }
+        }
+        if (checkedVal === "Android") {
+            score++;
+            document.getElementById('score').innerHTML = `Score : ${score}`;
+        } else {
+            document.getElementById('score').innerHTML = `Score : ${score}`;
+        }
+        return false
+
+    }
+
+    function Q2() {
+        let checkedVal;
+        let radioName = document.getElementsByName('Q2Ans');
+        for (let i = 0; i < radioName.length; i++) {
+            if (radioName[i].checked) {
+                checkedVal = radioName[i].value;
+                console.log("Checked Value", checkedVal)
+            } else {
+                console.log('didnt checked');
+            }
+        }
+        if (checkedVal === "LG G4") {
+            score++;
+            document.getElementById('score').innerHTML = `Score : ${score}`;
+
+        } else {
+            document.getElementById('score').innerHTML = `Score : ${score}`;
+        }
+        return false
+    }
+
+</script>
+
+</html>

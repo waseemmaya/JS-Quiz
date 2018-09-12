@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Udemy</title>
+</head>
+
+<body>
+    <div id="output"></div>
+
+    <button onclick="result()">Submit</button>
+
+</body>
+
+<script>
+    var url = 'https://api.myjson.com/bins/14v6f';
+
+    var output = document.getElementById('output');
+
+
+
+
+
+    loadQuestions();
+
+    function loadQuestions() {
+        var myObj = [];
+        fetch(url)
+            .then((data) => data.json())
+            .then((val) => {
+                myObj = val;
+                return getData(myObj);
+            })
+    }
+
+    function getData(obj) {
+        obj.map((data, i) => {
+            let myQuestion = `<h5>${data.question}</h5>`;
+            output.innerHTML += myQuestion;
+
+            for (const ans in data.answers) {
+                console.log(ans);
+                let myAns = `<input type="radio"
+                 name='${'q' + i}' 
+                 value="${data.answers[ans]}">${data.answers[ans]}`
+                output.innerHTML += myAns;
+            }
+        })
+    }
+
+    function result() {
+        var allRadios = document.getElementsByTagName('input');
+
+        for (let i = 0; i < allRadios.length; i++) {
+            var radios = document.getElementsByName('q' + i);
+            console.log(radios[i].checked);
+
+        }
+    }
+
+
+</script>
+
+</html>
